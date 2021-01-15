@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {RecipesService} from '../recipes.service';
 import {Recipe} from '../recipe.model';
@@ -9,7 +9,7 @@ import {AlertController} from '@ionic/angular';
     templateUrl: './recipe-detail.page.html',
     styleUrls: ['./recipe-detail.page.scss'],
 })
-export class RecipeDetailPage implements OnInit {
+export class RecipeDetailPage implements OnInit, OnDestroy {
     selectedRecipes: Recipe;
 
     constructor(
@@ -48,6 +48,10 @@ export class RecipeDetailPage implements OnInit {
                     }
                 }]
         }).then(alert => alert.present());
+    }
+
+    ngOnDestroy() {
+        console.log('recipe detail on destroy');
     }
 
 }
